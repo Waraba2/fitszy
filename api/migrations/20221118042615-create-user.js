@@ -1,35 +1,33 @@
-const { Model } = require("sequelize");
-const bcrypt = require("bcryptjs");
-
-module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
-
-    toJSON() {
-      return {...this.get(), id:undefined}  //hides defult id
-    }
-  }
-
-  User.init(
-    {
-      uuid: {   //make id
+'use strict';
+// {import('sequelize-cli').Migration} 
+module.exports = {
+  async up(queryInterface, DataTypes) {
+    await queryInterface.createTable('users', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER
+      },
+      uuid: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
       firstName: { 
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
       },
       lastName: { 
         type: DataTypes.STRING,
-        allowNull: false, 
+        allowNull: false
       },
       age: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
       },
       weight: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
       },
       email: {
         type: DataTypes.STRING,
@@ -41,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       passwordHash: { type: DataTypes.STRING },
       password: {
-        type: DataTypes.VIRTUAL,
+        type: DataTypes.STRING,
         validate: {
           isLongEnough: (val) => {
             if (val.length < 7) {
@@ -50,19 +48,17 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-    },
-    {
-      sequelize,
-      tableName: 'users',
-      modelName: "User",
-    }
-  );
-
-  User.beforeSave((user, options) => {
-    if (user.password) {
-      user.passwordHash = bcrypt.hashSync(user.password, 10);
-    }
-  });
-
-  return User;
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE
+      }
+    });
+  },
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('users');
+  }
 };
