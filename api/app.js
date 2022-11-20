@@ -80,10 +80,11 @@ app.use("/api", require("./controllers"));
 //         return res.status(500).json({error: 'something went wrong'})
 //     }
 // })
-sequelize.authenticate()
 
-app.listen(process.env.PORT || 5000, () => {
+
+app.listen(process.env.PORT || 5000, async () => {
     console.log('Sever up on http://localhost:5000');
+    await sequelize.authenticate()
     console.log('Database connected!')
 })
 

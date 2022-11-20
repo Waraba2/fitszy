@@ -22,11 +22,11 @@ module.exports = {
         allowNull: false
       },
       age: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false
       },
       weight: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false
       },
       email: {

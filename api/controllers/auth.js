@@ -2,11 +2,13 @@ const router = require("express").Router();
 const { user } = require("../models");
 const passport = require("../middleware/passport-config");
 
-router.post("/signup", (req, res) => {
+router.post("/signup", (req, res) => {    //  /api/auth/signup would be how you access this
     console.log("POST body: ", req.body);
     user.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
+      age: req.body.age,
+      weight: req.body.weight,
       email: req.body.email,
       password: req.body.password,
     })
