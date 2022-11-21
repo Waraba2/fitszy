@@ -42,7 +42,6 @@ app.use(passport.session());
 // this mounts controllers/index.js at the route `/api`
 app.use("/api", require("./controllers"));
 
-
 // app.post('/users', async(req, res) => {
 //     const{firstName, lastName, age, weight, email, password} = req.body;
 

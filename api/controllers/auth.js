@@ -35,7 +35,7 @@ router.post("/signup", (req, res) => {    //  /api/auth/signup would be how you 
     }
   });
   
-  router.post("/logout", (req, res, next) => {
+  router.post("/logout", (req, res, next) => {    //logout user.    The logout() is a passport js method
     req.logout((err) => {
       if (err) return next(err);
       res.status(200).json({ message: "Logout successful" });
