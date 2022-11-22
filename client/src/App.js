@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { Signup } from "./pages/signup/Signup";
 import LoginPage from "./pages/login/Login";
-import Test from "./pages/AuthButton"
+import Test from "./components/extra/AuthButton"
 
 import './App.css';
 import {Home} from'./pages'

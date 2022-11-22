@@ -25,7 +25,7 @@ function LoginPage() {
     try {
       await auth.authenticate(email, password);  //authenticate from authcontext 
     //   navigate(from, { replace: true });   //go to where user was before login
-         navigate("/test")
+         navigate("/")
     } catch (error) {
       setError(true);
     }
