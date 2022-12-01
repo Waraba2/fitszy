@@ -24,7 +24,7 @@ router.post("/signup", (req, res) => {    //  /api/auth/signup would be how you 
   router.post("/login", passport.authenticate("local"), (req, res) => {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
-    console.log(req.user)
+    // console.log(req.user)
 
     res.json(req.user);
   });
