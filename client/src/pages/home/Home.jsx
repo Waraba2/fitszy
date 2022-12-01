@@ -4,7 +4,7 @@ import {Header, Footer, Body} from '../../containers'
 const Home = () => {
   return (
     <div className='Home'>
-        <Header />
+        {/* <Header /> */}
         <Body />
         <Footer />
     </div>

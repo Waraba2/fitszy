@@ -2,7 +2,6 @@
 const {Model} = require('sequelize');
 const bcrypt = require("bcryptjs");
 
-
 module.exports = (sequelize, DataTypes) => {
   class user extends Model {
     /**
@@ -10,8 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+    static associate({ workouts }) {
+      this.hasMany(workouts, {
+        onDelete: "cascade",
+      });
     }
 
     toJSON() {

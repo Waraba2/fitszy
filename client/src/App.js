@@ -4,6 +4,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { Signup } from "./pages/signup/Signup";
 import LoginPage from "./pages/login/Login";
 import Test from "./components/extra/AuthButton"
+import { Header } from "./containers";
 
 import './App.css';
 import {Home} from'./pages'
@@ -13,6 +14,7 @@ function App() {
     <div className="App">
       <AuthProvider>
         <BrowserRouter>
+        <Header />
           <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/signup" element={<Signup/>} />
