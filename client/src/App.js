@@ -6,8 +6,14 @@ import LoginPage from "./pages/login/Login";
 import Test from "./components/extra/AuthButton"
 import { Header } from "./containers";
 
+import ShowWorkouts from "./pages/workouts/ShowWorkouts"
+import CreateWorkouts from "./pages/workouts/Createworkouts"
+import Workouts from "./pages/workouts/Workouts";
+
 import './App.css';
 import {Home} from'./pages'
+import Exercise from "./pages/workouts/Exercise";
+
 
 function App() {
   return (
@@ -19,9 +25,12 @@ function App() {
             <Route path="/" element={<Home/>} />
             <Route path="/signup" element={<Signup/>} />
             <Route path="/login" element={<LoginPage/>} />
+            <Route path="/workouts/:id" element={<Workouts/>} />
+            <Route path="/createWorkouts" element={<CreateWorkouts/>} />
             <Route path="/test" element={<Test/>} />
+            <Route path="workouts" element={<ShowWorkouts/>}/>
+            <Route path="/workouts/:id/exercise/exerciseId/:id" element={<Exercise/>} />   {/*this lets each exercise have their own page (adding /workouts/:id to it) and in the link I call exerceiseId/:id*/}
           </Routes>
-
         {/* <Home/> */}
         </BrowserRouter>
 

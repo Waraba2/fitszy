@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import { Formik, Form } from 'formik';
-import { TextField } from './TextField';
+import { TextField } from '../../components/extra/TextField';
 import * as Yup from 'yup';
 import Axios from "axios";
 
 export const Signup = () => {
-    const [registerFirstname, setRegisterFirstname] = useState("");
-    const [registerLastname, setRegisterLastname] = useState("");
-    const [age, setAge] = useState(0);
-    const [weight, setWeight] = useState(0);
-    const [email, setEmail] = useState("");
-    const [registerPassword, setRegisterPassword] = useState("");
+    // const [registerFirstname, setRegisterFirstname] = useState("");
+    // const [registerLastname, setRegisterLastname] = useState("");
+    // const [age, setAge] = useState(0);
+    // const [weight, setWeight] = useState(0);
+    // const [email, setEmail] = useState("");
+    // const [registerPassword, setRegisterPassword] = useState("");
 
   const validate = Yup.object({
     firstName: Yup.string()

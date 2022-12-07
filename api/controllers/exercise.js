@@ -2,6 +2,16 @@ const router = require("express").Router();
 const { user, workouts, exercise } = require("../models");
 const passport = require("../middleware/passport-config");
 
+router.get("/" , passport.isAuthenticated(), async (req, res) => {
+  exercise.findAll({}).then((allExercises) => res.json(allExercises));
+});
+
+router.get("/exerciseId/:id", passport.isAuthenticated(), async (req, res) => {
+  const id = req.params.id;
+  const exercises = await exercise.findByPk(id);
+  res.json(exercises)
+});
+
 //this is get all the exercises for a certain workout
 router.get("/:workoutsId", passport.isAuthenticated(), async (req, res) => {
     const workoutsId = req.params.workoutsId;  //id of workouts

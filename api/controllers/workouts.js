@@ -1,15 +1,17 @@
 const router = require("express").Router();
-const { user, workouts } = require("../models");
+const { user, workouts, exercise } = require("../models");
 const passport = require("../middleware/passport-config");
 
-router.get("/", passport.isAuthenticated(), (req, res) => {
-    workouts.findAll({}).then((allWorkouts) => res.json(allWorkouts));
+router.get("/", passport.isAuthenticated(), async (req, res) => {
+  const id = req.user.uuid;
+  const listOfWorkouts = await workouts.findAll({
+    where: { userId: id },
+  });
+  res.json(listOfWorkouts);
 });
 
-router.post("/", passport.isAuthenticated(), (req, res) => {
-    let { content } = req.body;
-
-    workouts.create({ 
+router.post("/", passport.isAuthenticated(), async (req, res) => {
+    await workouts.create({ 
         title:req.body.title,
         textBody: req.body.textBody,
         userId: req.user.uuid
@@ -22,12 +24,11 @@ router.post("/", passport.isAuthenticated(), (req, res) => {
       });
 });
 
-router.get("/byuserId/:id", passport.isAuthenticated(), async (req, res) => {
+//this is used to get workouts by id(useparms)
+router.get("/:id", passport.isAuthenticated(), async (req, res) => {
     const id = req.params.id;
-    const listOfPosts = await workouts.findAll({
-      where: { userId: id },
-    });
-    res.json(listOfPosts);
+    const post = await workouts.findByPk(id);
+    res.json(post)
   });
 
 

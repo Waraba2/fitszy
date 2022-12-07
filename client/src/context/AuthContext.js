@@ -58,6 +58,7 @@ const AuthProvider = ({ children }) => {
       body: JSON.stringify({ email, password }),    //with the email and password
       headers: {
         "Content-Type": "application/json",
+        
       },
     })
 
