@@ -6,3 +6,12 @@ export {default as Section2} from './section2/Section2';
 export {default as Section3} from './section3/Section3';
 export {default as About} from './about/About';
 export {default as Aboutside} from './aboutside/Aboutside';
+export {default as SearchExercises} from './search_exercises/SearchExercises';
+export {default as HorizontalScrollbar} from './horizontal_scroll_bar/HorizontalScrollbar';
+export {default as BodyPart} from './bodypart/BodyPart';
+export {default as Exercises} from './exercises/Exercises';
+export {default as ExerciseCard} from './exercise_card/ExerciseCard';
+export {default as Detail} from './detail/Detail';
+export {default as ExerciseVideos} from './exercise_videos/ExerciseVideos';
+export {default as SimilarExercises} from './similar_exercises/SimilarExercises';
+export {default as Loader} from './loader/Loader'
