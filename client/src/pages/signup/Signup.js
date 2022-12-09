@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import { TextField } from '../../components/extra/TextField';
 import * as Yup from 'yup';
@@ -12,6 +12,7 @@ export const Signup = () => {
     // const [weight, setWeight] = useState(0);
     // const [email, setEmail] = useState("");
     // const [registerPassword, setRegisterPassword] = useState("");
+    const navigate = useNavigate();
 
   const validate = Yup.object({
     firstName: Yup.string()
@@ -60,7 +61,7 @@ export const Signup = () => {
             },
             withCredentials: true,
             url: "http://localhost:5000/api/auth/signup",
-          }).then((res) => console.log(res));
+          }).then((res) => console.log(res)).then(navigate("/login"))
       }}
     >
       {formik => (
