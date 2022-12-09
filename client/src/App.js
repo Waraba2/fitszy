@@ -13,6 +13,7 @@ import Workouts from "./pages/workouts/Workouts";
 import './App.css';
 import {Home} from'./pages'
 import Exercise from "./pages/workouts/Exercise";
+import CreateExercise from "./pages/workouts/CreateExercise";
 
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
             <Route path="/signup" element={<Signup/>} />
             <Route path="/login" element={<LoginPage/>} />
             <Route path="/workouts/:id" element={<Workouts/>} />
-            <Route path="/createWorkouts" element={<CreateWorkouts/>} />
+            <Route path="/createworkouts" element={<CreateWorkouts/>} />
+            <Route path="/workouts/:id/createexercise/:id" element={<CreateExercise/>}/>
             <Route path="/test" element={<Test/>} />
             <Route path="workouts" element={<ShowWorkouts/>}/>
             <Route path="/workouts/:id/exercise/exerciseId/:id" element={<Exercise/>} />   {/*this lets each exercise have their own page (adding /workouts/:id to it) and in the link I call exerceiseId/:id*/}

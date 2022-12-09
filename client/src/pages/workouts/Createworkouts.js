@@ -74,7 +74,7 @@ export default function Createworkouts() {
             autoFocus
           />
           <button type="submit" className="btn btn-primary">
-            Save Post
+            Create Workout
           </button>
         </div>
       </form>

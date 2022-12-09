@@ -21,12 +21,10 @@ const AuthButton = () => {
   };
 
   return (
-    <div className="text-white">
-      {/* Welcome! {auth.user.firstName}{auth.user.lastName}{auth.user.age}{auth.user.weight}{auth.user.email} */}
-      {auth.user.uuid}
-      <button className='login_button' onClick={logout}>
+    <div>
+      {/* <button className='login_button' onClick={logout}>
         Logout
-      </button>
+      </button> */}
     </div>
   );
 };

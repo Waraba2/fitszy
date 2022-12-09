@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useParams, Link } from "react-router-dom";
+import CreateExercise from './CreateExercise';
 
 export default function Workouts(props) {
   const [workout, setWorkout] = useState([])
@@ -70,7 +71,12 @@ export default function Workouts(props) {
                    </div>
           })
           // workout[0] === undefined || null ? <div></div> : <div>{workout[0].title}</div>
-        }
+          
+          }
+          <Link to={`createexercise/${params.id}`}>
+            {/* <CreateExercise workoutId = {params.id}/> */}
+            <p>Create Exercise</p>
+          </Link>
         </div>
       </div>
     </div>
