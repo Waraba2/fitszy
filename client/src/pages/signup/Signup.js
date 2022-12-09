@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import { TextField } from '../../components/extra/TextField';
 import * as Yup from 'yup';
@@ -75,6 +76,10 @@ export const Signup = () => {
             <TextField label="Confirm Password" name="confirmPassword" type="password" />
             <button type="submit">Register</button>
             <button type="reset">Reset</button>
+            <div>
+              <p>Already have an account?</p>
+              <Link to={"/login"}>Login</Link>
+            </div>
           </Form>
         </div>
       )}

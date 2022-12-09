@@ -36,6 +36,7 @@ export default function Exercise() {
   return (
     <div>
         <p>{exercise.name}</p>
+        <p>{exercise.reps}</p>
     </div>
   )
 }

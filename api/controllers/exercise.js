@@ -58,4 +58,5 @@ router.delete("/:exerciseId", passport.isAuthenticated(), async (req, res) => {
 
 
 
+
 module.exports = router;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 function LoginPage() {
@@ -64,6 +64,10 @@ function LoginPage() {
           <button type="submit" className="btn btn-primary ml-auto">
             Login
           </button>
+          <div>
+            <p>Need an account?</p>
+            <Link to={"/signup"}>Signup</Link>
+          </div>
         </div>
       </form>
     </div>
