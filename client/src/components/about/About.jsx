@@ -5,9 +5,7 @@ function About () {
     return (
         <div className='About'>
             <h1 className="header--title">Get Stronger and Fitter with Us</h1>
-            <div className="header--subtitle">Gradescope helps you seamlessly administer and grade all of your
-                assessments, whether online or in-class. Save time grading and get a clear picture of how your students
-                are doing.
+            <div className="header--subtitle">Fitszy helps you track your fitness progress on every aspect. You can create workouts, keep track of your nutrition and progress.
             </div>
             <div className="tiiBtnContainer">
                 <a className="tiiBtn-primary"

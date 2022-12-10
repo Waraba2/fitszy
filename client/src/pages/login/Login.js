@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-
+import './Login.css'
 function LoginPage() {
   const auth = useAuth();  //from authcontext
   const navigate = useNavigate();  //helps navigate to different routes
@@ -42,8 +42,11 @@ function LoginPage() {
 
   return (
     <div className="col-10 col-md-8 col-lg-7">
-      <form onSubmit={login}>
-        <div className="form-row">
+      <div className="background">
+        <div className="shape"></div>
+        <div className="shape"></div>
+      </div>
+      <form className="form1"  onSubmit={login}>
           {errorMessage}
           <input
             type="email"
@@ -64,11 +67,12 @@ function LoginPage() {
           <button type="submit" className="btn btn-primary ml-auto">
             Login
           </button>
-          <div>
-            <p>Need an account?</p>
-            <Link to={"/signup"}>Signup</Link>
-          </div>
+        <div className="social">
+          <div className="go"><i className="fab fa-google"></i> Google</div>
+          <div className="fb"><i className="fab fa-facebook"></i> Facebook</div>
         </div>
+        <p>Need an account?</p>
+        <Link to={"/signup"}>Signup</Link>
       </form>
     </div>
   );

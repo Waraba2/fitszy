@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
-import { TextField } from '../../components/extra/TextField';
+import { TextField } from "../../components/extra/TextField";
 import * as Yup from 'yup';
 import Axios from "axios";
+import {Box} from "@mui/system";
+import './Signup.css';
 
 export const Signup = () => {
-    // const [registerFirstname, setRegisterFirstname] = useState("");
-    // const [registerLastname, setRegisterLastname] = useState("");
-    // const [age, setAge] = useState(0);
-    // const [weight, setWeight] = useState(0);
-    // const [email, setEmail] = useState("");
-    // const [registerPassword, setRegisterPassword] = useState("");
-    const navigate = useNavigate();
+    const [registerFirstname, setRegisterFirstname] = useState("");
+    const [registerLastname, setRegisterLastname] = useState("");
+    const [age, setAge] = useState(0);
+    const [weight, setWeight] = useState(0);
+    const [email, setEmail] = useState("");
+    const [registerPassword, setRegisterPassword] = useState("");
 
   const validate = Yup.object({
     firstName: Yup.string()
@@ -61,26 +61,37 @@ export const Signup = () => {
             },
             withCredentials: true,
             url: "http://localhost:5000/api/auth/signup",
-          }).then((res) => console.log(res)).then(navigate("/login"))
+          }).then((res) => console.log(res));
       }}
     >
       {formik => (
         <div>
-          <h1>Sign Up</h1>
-          <Form>
-            <TextField label="First Name" name="firstName" type="text"/>
-            <TextField label="last Name" name="lastName" type="text"/>
-            <TextField label="Age" name="age" type="age" />
-            <TextField label="Weight" name="weight" type="weight" />
-            <TextField label="Email" name="email" type="email" />
-            <TextField label="Password" name="password" type="password" />
-            <TextField label="Confirm Password" name="confirmPassword" type="password" />
-            <button type="submit">Register</button>
-            <button type="reset">Reset</button>
-            <div>
-              <p>Already have an account?</p>
-              <Link to={"/login"}>Login</Link>
+            <div className="background">
+                <div className="shape"></div>
+                <div className="shape"></div>
             </div>
+          <Form className="form">
+              <Box sx={{display: 'flex',
+                  justifyContent: 'space-between',
+              }}>
+              <Box>
+                  <TextField label="First Name" name="firstName" type="text"/>
+                  <TextField label="last Name" name="lastName" type="text"/>
+                  <TextField label="Age" name="age" type="age" />
+                  <TextField label="Weight" name="weight" type="weight" />
+              </Box>
+              <Box>
+                  <TextField label="Email" name="email" type="email" />
+                  <TextField label="Password" name="password" type="password" />
+                  <TextField label="Confirm Password" name="confirmPassword" type="password" />
+              </Box>
+                  </Box>
+              <Box sx={{display: 'flex',
+                  justifyContent: 'space-between',
+              }}>
+                  <button type="submit">Register</button>
+                  <button type="reset">Reset</button>
+              </Box>
           </Form>
         </div>
       )}
