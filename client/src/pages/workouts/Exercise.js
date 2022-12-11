@@ -17,7 +17,7 @@ export default function Exercise() {
             let exerciseData = await response.json();
             
             setExercise(exerciseData);
-            console.log(exerciseData)
+            console.log(exerciseData);
             return exerciseData;
             
           } catch (error) {
@@ -35,8 +35,9 @@ export default function Exercise() {
     
   return (
     <div>
+        <Link to={`exercise/edit/${params.id}`}>Edit workout</Link>   {/*link to workout page*/}
         <p>{exercise.name}</p>
-        <p>{exercise.reps}</p>
+        <p>{exercise.id}</p>
     </div>
   )
 }

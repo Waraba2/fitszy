@@ -41,6 +41,15 @@ router.post("/", passport.isAuthenticated(), async (req, res) => {
         res.status(400).json(err);
       });
   });
+
+router.put("/edit/:id", passport.isAuthenticated(), async (req, res) => {
+  let values = {id: req.body.id, name: req.body.name, reps: req.body.reps, sets: 
+    req.body.sets, weight: req.body.weight,restPeriod: req.body.restPeriod,pr: req.body.pr,videoUrl: req.body.videoUrl,desc: req.body.desc,workoutId: req.body.workoutId}
+  let condition = {where: {id: req.body.id}}
+  exercise.update(values, condition);
+
+  });
+ 
   
 //this will delete a exercise
 router.delete("/:exerciseId", passport.isAuthenticated(), async (req, res) => {

@@ -14,6 +14,7 @@ import './App.css';
 import {Home} from'./pages'
 import Exercise from "./pages/workouts/Exercise";
 import CreateExercise from "./pages/workouts/CreateExercise";
+import EditExercise from "./pages/workouts/EditExercise";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route path="/test" element={<Test/>} />
             <Route path="workouts" element={<ShowWorkouts/>}/>
             <Route path="/workouts/:id/exercise/exerciseId/:id" element={<Exercise/>} />   {/*this lets each exercise have their own page (adding /workouts/:id to it) and in the link I call exerceiseId/:id*/}
+            <Route path="/workouts/:id/exercise/exerciseId/:id/exercise/edit/:id" element={<EditExercise/>} />
           </Routes>
         {/* <Home/> */}
         </BrowserRouter>
