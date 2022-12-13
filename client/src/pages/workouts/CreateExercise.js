@@ -20,6 +20,7 @@ export default function CreateExercise() {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
     let params = useParams();
+    const navigate = useNavigate();
   
 
     const handleNameChange = (event) => {
@@ -75,7 +76,7 @@ export default function CreateExercise() {
                 desc: desc,
                 workoutId: params.id
             }),
-          });
+          }).then(navigate(`/workouts/${params.id}`))
     
           if (response.ok) {
             setSuccess(true);

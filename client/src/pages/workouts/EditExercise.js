@@ -60,7 +60,6 @@ export default function EditExercise() {
           }).then(navigate(`/workouts/${exercise.workoutId}/exercise/exerciseId/${params.id}`))
           if (response.ok) {
             setSuccess(true); 
-            navigate(`/workouts/${exercise.workoutId}/exercise/exerciseId/${params.id}`)  
           } else {
             setError(true);
           }

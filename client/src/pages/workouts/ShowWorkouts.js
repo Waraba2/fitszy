@@ -42,6 +42,9 @@ export default function ShowWorkouts() {
     return (
       <>
       <div>
+        <Link to={`/createworkouts`}>Create New Workouts</Link>
+      </div>
+      <div>
         {
            workout.map((workout) => {
             return <div key={workout.id}>  

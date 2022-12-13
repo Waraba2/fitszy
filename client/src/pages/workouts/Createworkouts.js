@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 export default function Createworkouts() {
   const [title, setTitle] =  useState();
   const [desc, setDesc] =  useState();
+  const navigate = useNavigate();
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -38,7 +39,7 @@ export default function Createworkouts() {
           title: title,
           textBody: desc
         }),
-      });
+      }).then((navigate(`/workouts`)))
 
       if (response.ok) {
         setSuccess(true);

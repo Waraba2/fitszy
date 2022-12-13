@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react'
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 
 export default function Exercise() {
     const [exercise, setExercise] = useState([])
     const [error, setError] = useState(false);
     let params = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function getExerciseData() {
@@ -32,10 +33,38 @@ export default function Exercise() {
         return () => {
         };
       }, [params]);
+
+      const deleteExercise = async (e) => {
+        e.preventDefault();
+          try {
+              console.log(params.id)
+              let response = await fetch(`http://localhost:5000/api/exercise/${params.id}`, {
+              method: "DELETE",
+              credentials: "include",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                id: params.id
+              }),
+            }).then(navigate(`/workouts/${exercise.workoutId}`))
+          } catch (error) {
+            console.error("Server error while deleting execise", error);
+            setError(true);
+          }
+      };
     
   return (
     <div>
-        <Link to={`exercise/edit/${params.id}`}>Edit workout</Link>   {/*link to workout page*/}
+      <div>
+        <button onClick={deleteExercise}>
+            Delete Exercise
+        </button>
+      </div>
+      <div>
+        <Link to={`exercise/edit/${params.id}`}>Edit Exercise</Link>   {/*link to workout page*/}
+      </div>
+       
         <p>{exercise.name}</p>
         <p>{exercise.id}</p>
     </div>

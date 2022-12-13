@@ -31,6 +31,18 @@ router.get("/:id", passport.isAuthenticated(), async (req, res) => {
     res.json(post)
   });
 
+router.delete("/:id", passport.isAuthenticated(), async (req, res) => {
+    const workoutId = req.params.id;
+  
+    await workouts.destroy({
+      where: {
+        id: workoutId,
+      },
+});
+  
+    res.json("DELETED SUCCESSFULLY");
+});
+
 
 
 module.exports = router;
