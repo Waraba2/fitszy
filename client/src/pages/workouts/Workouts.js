@@ -83,25 +83,41 @@ export default function Workouts(props) {
 
 
   return (
-    <div>
-      <button className = "deleteButton" onClick={deleteWorkout}>Delete Workout</button>
+    <div className='container'>
+        <div className="background">
+          <div className="shape"></div>
+          <div className="shape"></div>
+        </div>
+      <h1 className='title'>{workout.title}</h1>
+      <p className='desc'>{workout.textBody}</p>
+      <div className='actions'>
+        <button id = "deleteButton" onClick={deleteWorkout}>Delete Workout</button>
+        <div className='createworkoutlink'>
+          <Link to={`createexercise/${params.id}`}>
+              {/* <CreateExercise workoutId = {params.id}/> */}
+              Create Exercise
+          </Link>
+        </div>
+      </div>
       <div>
-        <div key={workout.id}>
+        <div className="workouts" key={workout.id}>
            {
            exercise.map((exercise) => {
-            return <div key={exercise.id}> 
+            return <div className="workoutLinks exerciseLink" key={exercise.id}> 
                       <Link to={`exercise/exerciseId/${exercise.id}`}>
-                        <p>{exercise.name}</p>
+                        <div>
+                          <p>{exercise.name}</p>
+                          <p>Sets: {exercise.sets}</p>
+                          <p>Reps: {exercise.reps}</p>
+                          <p>Weight: {exercise.weight}</p>
+                        </div>
+                        
                       </Link>
                    </div>
           })
           // workout[0] === undefined || null ? <div></div> : <div>{workout[0].title}</div>
           
           }
-          <Link to={`createexercise/${params.id}`}>
-            {/* <CreateExercise workoutId = {params.id}/> */}
-            <p>Create Exercise</p>
-          </Link>
         </div>
       </div>
     </div>

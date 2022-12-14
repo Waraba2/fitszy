@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useParams, Link, useNavigate } from "react-router-dom";
+import "../workouts/Exercise.css";
 
 
 export default function Exercise() {
@@ -55,18 +56,27 @@ export default function Exercise() {
       };
     
   return (
-    <div>
-      <div>
-        <button onClick={deleteExercise}>
-            Delete Exercise
-        </button>
+    <div className='container'>
+     <div className="background">
+          <div className="shape"></div>
+          <div className="shape"></div>
       </div>
-      <div>
-        <Link to={`exercise/edit/${params.id}`}>Edit Exercise</Link>   {/*link to workout page*/}
+      <h1 className='title'>{exercise.name}</h1>
+      <p className='desc'>{exercise.desc}</p>
+      <div className='actions'>
+        <button id = "deleteButton" onClick={deleteExercise}>Delete Workout</button>
+        <div className='createworkoutlink'>
+          <Link to={`exercise/edit/${params.id}`}>Edit Exercise</Link> 
+        </div>
       </div>
-       
-        <p>{exercise.name}</p>
-        <p>{exercise.id}</p>
+      <div className='exerciseData'>
+        <p>Excerise: {exercise.name}</p>
+        <p>Sets x Reps: {exercise.sets} x {exercise.reps}</p>
+        <p>Weight: {exercise.weight}</p>
+        <p>Personal Record: {exercise.pr}</p>
+        <p>Video Url: {exercise.videoUrl}</p>
+      </div>
+        
     </div>
   )
 }
