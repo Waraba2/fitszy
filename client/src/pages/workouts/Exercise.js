@@ -64,7 +64,7 @@ export default function Exercise() {
       <h1 className='title'>{exercise.name}</h1>
       <p className='desc'>{exercise.desc}</p>
       <div className='actions'>
-        <button id = "deleteButton" onClick={deleteExercise}>Delete Workout</button>
+        <button id = "deleteButton" onClick={deleteExercise}>Delete Excerise</button>
         <div className='createworkoutlink'>
           <Link to={`exercise/edit/${params.id}`}>Edit Exercise</Link> 
         </div>

@@ -22,9 +22,9 @@ const AuthButton = () => {
 
   return (
     <div>
-      {/* <button className='login_button' onClick={logout}>
+      <Link className='login_button' to="/login">
         Logout
-      </button> */}
+      </Link>
     </div>
   );
 };
