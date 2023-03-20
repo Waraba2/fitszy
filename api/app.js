@@ -1,74 +1,107 @@
-require('dotenv').config();     //this makes you able to use .env files
-const express = require("express");
-const expressSession = require("express-session");
-const passport = require("./middleware/passport-config");
-const cors = require("cors");
-const { sequelize, user } = require("./models");
-const app = express();
-// const session = require('express-session');
+const express = require('express')
+const bodyParser = require('body-parser')
+const morgan = require('morgan')
+require('dotenv').config()
+const sequelize = require('./Express-Sequel-Passport/src/db/db')
+const {DataTypes} = require("sequelize");
+const User = require('./Express-Sequel-Passport/src/models/user')(sequelize, DataTypes);
+const Workout = require('./Express-Sequel-Passport/src/models/workout')(sequelize, DataTypes);
+const passport = require('passport')
+require('./Express-Sequel-Passport/config/passport')
+const session = require('express-session')
 
-const PORT = process.env.PORT;
-const secret = process.env.SESSION_SECRET;
-const dbUser = process.env.DB_USER;
-const dbPass = process.env.DB_PASS;
-const dbHost = process.env.DB_HOST;
-const dbPort = process.env.DB_PORT;
-const dbName= process.env.DB_NAME;
-const frontEnd = process.env.FRONTEND_URL;
+//Initializing express
+const app = express()
+const cors = require('cors');
+app.use(cors());
 
-const pgSession = require('connect-pg-simple')(expressSession);
-const sessionPool = require('pg').Pool;
-
-const conObject = new sessionPool({
-  user: dbUser,
-  password: dbPass,
-  host: dbHost,
-  port: dbPort,
-  database: dbName
-})
-
-app.use(express.json());
-
-//Middlewares
-
-app.use(     //protects from attacks. And makes things safer.
-    cors({
-      origin: frontEnd, // <-- location of the react app were connecting to
-      methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
-      credentials: true,
-      
-    })
-);
-
-// setup passport and session cookies
-app.use(
-    expressSession({
-      secret: process.env.SESSION_SECRET,
-      credentials: true,
-      resave: false,
-      saveUninitialized: false,   //was true
-      store: new pgSession({
-        tableName : 'test',   // Use another table-name than the default "session" one
-        // pgPromise: 'postgres://ctp_user:ctp_pass@localhost:5432/fitszy_db',
-        pool: conObject,
-        ttl: 3600
-      }),
-      cookie: {
-        maxAge: 3600000,
-        // secure : true       uncomment when its in production
-      }
-})
-);
-
+//Express Middleware
+app.use(bodyParser.json())
+app.use(morgan('dev'))
+app.use(session({secret: 'keyboard cat', resave: true, saveUninitialized:true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// this mounts controllers/index.js at the route `/api`
-app.use("/api", require("./controllers"));
 
-app.listen(process.env.PORT || 5000, async () => {
-    console.log('Sever up on http://localhost:5000');
-    await sequelize.authenticate()
-    console.log('Database connected!')
+
+
+//Login Route
+app.post('/login',
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.status(200).send({ message: 'Logged In Successful' })
+  })
+
+
+
+//Logout Route
+app.get('/logout', (req, res) => {
+    req.logout();
+    res.send({message: "Logged out"});
 })
 
+const isAuthenticated = (req,res,next) => {
+    if(req.user)
+       return next();
+    else
+       return res.status(401).json({
+         error: 'User not authenticated'
+       })
+}
+
+app.use(isAuthenticated);
+
+
+const multer = require('multer');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'workout_videos',
+    resource_type: 'video',
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/workouts', upload.single('video'), async (req, res) => {
+  try {
+    const { title } = req.body;
+    const videoUrl = req.file.path;
+    const workout = await Workout.create({
+      title,
+      videoUrl,
+      UserId: req.user.id,
+    });
+    res.status(201).send(workout);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: 'Error adding workout' });
+  }
+});
+
+
+//Route
+app.get('/', (req, res) => {
+    res.send({message: 'Hello World'})
+})
+
+// Synchronize the models with the database
+sequelize.sync({ alter: true }).then(() => {
+  console.log('Connected to database');
+}).catch((error) => {
+  console.error(`Error: Cannot connect to database ${error}`);
+});
+
+app.listen(process.env.PORT, async () => {
+    console.log(`Example app listening at http://localhost:${process.env.PORT}`)
+})
