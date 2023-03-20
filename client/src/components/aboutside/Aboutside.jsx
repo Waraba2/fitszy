@@ -1,6 +1,6 @@
 import React from 'react'
 import './Aboutside.css'
-import landing from'../../assets/landing_page.jpeg'
+import landing from'../../assets/landing_page.png'
 
 function Aboutside () {
     return (

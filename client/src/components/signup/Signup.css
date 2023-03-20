@@ -12,35 +12,47 @@
 
 
 .signup_button:hover{
-    background-color: #2B2D42;
-    color: red;
+    background-color: var(--white);
+    color: var(--logo-color);
 }
 
 .login_button:hover {
-    background-color: #2B2D42;
-    color: white;
+    background-color: var(--white);
+    color: var(--palette-color3);
 }
 
 .signup_button {
     font-family: var(--font-family);
     text-decoration: none;
     padding: 8px 16px;
-    background-color: var(--palette-color1);
+    background-color: var(--logo-color);
     margin-right: 12px;
     border-radius: 4px;
-    color: black;
+    color: var(--white);
     box-shadow: 0 8px 18px rgba(0,0,0,0.15);
 }
 
 .login_button {
     font-family: var(--font-family);
     padding: 8px 16px;
-    border: solid black 2px;
+    border: solid var(--white) 2px;
     border-radius: 4px;
     text-decoration: none;
-    color:black;
+    color:var(--white);
 }
 
+.logout_button {
+    font-family: var(--font-family);
+    padding: 8px 16px;
+    border: solid var(--white) 2px;
+    border-radius: 4px;
+    text-decoration: none;
+    color:var(--white);
 
+}
+.logout_button:hover {
+    background-color: var(--white);
+    color: var(--palette-color3);
+}
 
 

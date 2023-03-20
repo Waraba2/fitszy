@@ -1,33 +1,24 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
-import { Signup } from "./pages/signup/Signup";
-import LoginPage from "./pages/login/Login";
-import Test from "./components/extra/AuthButton"
+import { Routes, Route } from "react-router-dom";
+import { Home, Login, Workout } from "./pages/index";
 
-import './App.css';
-import {Home} from'./pages'
+
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <AuthProvider>
-        <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/signup" element={<Signup/>} />
-            <Route path="/login" element={<LoginPage/>} />
-            <Route path="/test" element={<Test/>} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+              <Route path="/workout" element={<Workout />} />
           </Routes>
-
-        {/* <Home/> */}
-        </BrowserRouter>
-
-      </AuthProvider>
-      
-      
+      <div className="bg-bubble-1"></div>
+      <div className="bg-bubble-2"></div>
     </div>
   );
 }
 
 export default App;
+
+

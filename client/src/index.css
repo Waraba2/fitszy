@@ -2,13 +2,7 @@
 
 
 body {
-  /*min-height: 100vh;*/
-    height: 100vh;
-  background: rgb(237,242,244);
-  background: linear-gradient(200deg, rgba(237,242,244,1) 0%, rgba(43,45,66,1) 100%);
-  animation: gradient 15s ease infinite;
-    background-size: 400% 400%;
-
+    background-color: var(--palette-color3);
 }
 
 
@@ -17,9 +11,20 @@ body {
   --palette-color1: #DB222A;
   --palette-color2: #EDERE4;
   --palette-color3: #2B2D42;
+	--white: #FFFFFF;
+	--black: #000000;
+	--logo-color: #de5f5a;
 
   --footer-column-header-size: 20px;
   --about-header-size: 4rem;
+
+	    /*scroll-behavior: smooth;*/
+    font-size: 100%;
+    --light: #fff;
+    --dark: #000;
+    --accent: hsl(173, 93%, 55%);
+    --faccent: hsla(173, 93%, 55%, 0.8);
+    --gray: hsl(0, 0%, 56%);
 }
 
 @keyframes gradient {

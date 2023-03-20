@@ -1,73 +1,39 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../AuthContext';
 
-function LoginPage() {
-  const auth = useAuth();  //from authcontext
-  const navigate = useNavigate();  //helps navigate to different routes
-  const location = useLocation();  //get location(route)
-  const [data, setData] = useState({ email: "", password: "" });  // state with username and password
-  const [error, setError] = useState(false);     //if there is an error
+function Login() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const { setisLoggedIn } = useAuth();
 
-  const from = location.state?.from?.pathname || "/";   //gets current location so when you login it takes the user where they were before
 
-  const fieldChanged = (name) => {   //updates the setData state that has the email and password
-    return (event) => {
-      let { value } = event.target;
-      setData((prevData) => ({ ...prevData, [name]: value }));
-    };
-  };
-
-  const login = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    let { email, password } = data;    //makes email and password variable the email and password that is in the data state           
-
-    try {
-      await auth.authenticate(email, password);  //authenticate from authcontext 
-    //   navigate(from, { replace: true });   //go to where user was before login
-         navigate("/")
-    } catch (error) {
-      setError(true);
-    }
+    axios.post('/login', {
+      username: username,
+      password: password
+    })
+    .then(response => {
+      console.log(response.data);
+      navigate('/');
+      setisLoggedIn(true);
+    })
+    .catch(error => {
+      console.error(error);
+      console.error('Authentication failed:', error.message);
+    });
   };
-
-  let errorMessage = "";
-  if (error) {
-    errorMessage = (
-      <div className="alert alert-danger" role="alert">
-        Login Failed
-      </div>
-    );
-  }
 
   return (
-    <div className="col-10 col-md-8 col-lg-7">
-      <form onSubmit={login}>
-        <div className="form-row">
-          {errorMessage}
-          <input
-            type="email"
-            className="form-control"
-            name="email"
-            placeholder="Email"
-            value={data.email}
-            onChange={fieldChanged("email")}
-          />
-          <input
-            type="password"
-            className="form-control"
-            name="password"
-            placeholder="Password"
-            value={data.password}
-            onChange={fieldChanged("password")}
-          />
-          <button type="submit" className="btn btn-primary ml-auto">
-            Login
-          </button>
-        </div>
-      </form>
+    <div>
+      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <button onClick={handleLogin}>Login</button>
     </div>
   );
 }
 
-export default LoginPage;
+export default Login;

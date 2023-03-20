@@ -4,6 +4,7 @@
 
 .Section1 p {
     font-family: var(--font-family);
+    color: var(--white);
 }
 
 
